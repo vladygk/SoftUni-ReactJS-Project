@@ -11,6 +11,11 @@ const response = await fetch(`${baseUrl}/login`,{
         password:body.password
     })
 });
+if(response.status===403){
+    
+    return null;
+
+}
 const token = await response.json();
 return token;
 }

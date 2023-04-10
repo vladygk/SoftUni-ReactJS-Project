@@ -39,6 +39,9 @@ function App() {
 const onLogin = async (value)=>{
 
    const data = await login(value);
+   if(!data){
+    return navigate('/');
+   }
    const authData = {name:data.email,token:data.accessToken, id:data._id};
    setToken(authData);
    save( authData);
