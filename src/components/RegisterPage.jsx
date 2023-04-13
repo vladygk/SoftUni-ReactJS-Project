@@ -1,6 +1,6 @@
 import { Link,useNavigate } from "react-router-dom";
 import { useState, useContext } from "react";
-import { AuthContext } from "../../contexts/authContext";
+import { AuthContext } from "../contexts/authContext";
 export const RegisterPage = () => {
   const [value, setValue] = useState({
     username: "",

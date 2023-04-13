@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { create } from "../../services/cardServices.js";
-import { AuthContext } from "../../contexts/authContext.jsx";
+import { create } from "../services/cardServices.js";
+import { AuthContext } from "../contexts/authContext.jsx";
 
 export const AddCardPage = () => {
   const [value, setValue] = useState({

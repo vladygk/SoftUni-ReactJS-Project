@@ -1,7 +1,7 @@
 import {Link, useNavigate} from "react-router-dom";
 import {useContext, useState} from "react";
 
-import { AuthContext } from "../../contexts/authContext.jsx";
+import { AuthContext } from "../contexts/authContext.jsx";
 export const LoginPage = () =>{
 const [value,setValue] = useState({
     username:'',
