@@ -15,4 +15,4 @@
 - Tailwind css
 - Softuni practice server
 
-*To run the project: npm run dev*
+*To run the project: `npm run dev`*
