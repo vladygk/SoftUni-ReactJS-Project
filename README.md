@@ -9,7 +9,7 @@
 -  Route guarding
 -  Client side validation
 
-**Technologyt used**
+**Technology stack**
 -React JS
 -React Router
 -Tailwind css
