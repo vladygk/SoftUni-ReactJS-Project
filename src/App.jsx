@@ -1,11 +1,11 @@
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { HomePage } from "./components/HomePage";
+import {HomePage} from "./components/HomePage"
+import { CatalogPage } from "./components/CatalogPage";
 import { LoginPage } from "./components/LoginPage";
 import { NavigationBar } from "./components/NavigationBar";
 import { RegisterPage } from "./components/RegisterPage";
 import { AddCardPage } from "./components/AddCardPage";
-import { FavoriteCardsPage } from "./components/FavoriteCardsPage";
 import { AuthContext } from "./contexts/authContext";
 import { login, register, logout } from "./services/authService.js";
 import { save, get, remove } from "./utils/sessionStorageHelper";
@@ -71,7 +71,8 @@ function App() {
         <NavigationBar />
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/:cardId" element={<DetailsPage />} />
+          <Route path="/catalog/:cardId" element={<DetailsPage />} />
+          <Route path="/catalog" element={<CatalogPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route
@@ -84,9 +85,9 @@ function App() {
               />
             }
           />
-          <Route path="/favorite" element={<FavoriteCardsPage />} />
+
           <Route
-            path="/:cardId/edit"
+            path="/catalog/:cardId/edit"
             element={
               <GuardedRoute
                 component={EditCardPage}

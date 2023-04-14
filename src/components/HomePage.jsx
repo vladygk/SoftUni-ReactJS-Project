@@ -1,18 +1,16 @@
-import { CardComponent } from "./CardComponent";
-import {useState,useEffect} from 'react';
-import { getAll } from '../services/cardServices.js';
-
+import { Link } from "react-router-dom";
 export const HomePage = () => {
-
-const [cards,setCards] = useState([]);
-
-useEffect(()=>{
-getAll().then(x=>setCards(x));
-},[])
-  return <>
-    <div className="flex  flex-wrap p-5 justify-evenly">
-    {!cards.length && <h1 className=" text-4xl ">No cards in the DB</h1>}
-    {Object.values(cards).map(c=> <CardComponent key={c._id} url={c.url} id ={c._id} />)}
+  return (
+    <div className=" relative">
+      <h1 className=" text-6xl text-center">Welcome to Yu-Gi-Oh DB</h1>
+      <h2 className="text-5xl mb-10 text-center">It's time to d-u-u-uel</h2>
+      <Link to="/catalog">
+        <img
+          className="hover:scale-105 absolute left-1/4 w-1/2 rounded-3xl"
+          src="/home-bg.jpg"
+          alt="home-image"
+        />
+      </Link>
     </div>
-  </>;
+  );
 };

@@ -1,4 +1,4 @@
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState, useContext } from "react";
 import { AuthContext } from "../contexts/authContext";
 export const RegisterPage = () => {
@@ -7,16 +7,56 @@ export const RegisterPage = () => {
     password: "",
     repassword: "",
   });
+  const [error, setError] = useState({
+    username: false,
+    password: false,
+    repassword:false
+  });
   const navigate = useNavigate();
+
+  const constraints = {
+    username: /[A-Za-z0-9!\-\_']{3,20}/g,
+    password: /[A-Za-z0-9\-\_?!.#$].{5,30}/g,
+  };
+  const errorMessages = {
+    username: "Invalid username, length must be between 3 and 20",
+    password: "Invalid password, length must me between 5 and 30",
+    repassword:"Password doesn't match"
+  };
+
+  const checkForPasswordMatch = (e)=>{
+  
+  if(e.target.value!==value.password){
+    setError((state) => ({ ...state, repassword: true }));
+  }else{
+    setError((state) => ({ ...state, repassword: false }));
+  }
+}
+
+  const checkForError = (e) => {
+    if (!constraints[e.target.name].test(e.target.value)) {
+      setError((state) => ({ ...state, [e.target.name]: true }));
+    } else {
+      setError((state) => ({ ...state, [e.target.name]: false }));
+    }
+
+  };
 
   const onChange = (e) => {
     setValue((state) => ({ ...state, [e.target.name]: e.target.value }));
   };
-  const {  onRegister } = useContext(AuthContext);
+  const { onRegister } = useContext(AuthContext);
 
   const onRegisterHandler = () => {
+    if (
+      Object.values(error).some((x) => x) ||
+      Object.values(value).some((x) => x === "")
+    ) {
+      return;
+    }
+
     onRegister(value);
-    navigate('/');
+    navigate("/");
   };
 
   return (
@@ -36,6 +76,7 @@ export const RegisterPage = () => {
                   Username
                 </label>
                 <input
+                  onBlur={checkForError}
                   value={value.username}
                   onChange={onChange}
                   type="text"
@@ -45,6 +86,11 @@ export const RegisterPage = () => {
                   placeholder="Ivan Ivanov.."
                   required=""
                 />
+                {error.username && (
+                  <p className=" absolute text-xl bg-green-400 rounded text-red-600">
+                    {errorMessages.username}
+                  </p>
+                )}
               </div>
               <div>
                 <label
@@ -54,6 +100,7 @@ export const RegisterPage = () => {
                   Password
                 </label>
                 <input
+                  onBlur={checkForError}
                   value={value.password}
                   onChange={onChange}
                   type="password"
@@ -63,6 +110,11 @@ export const RegisterPage = () => {
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   required=""
                 />
+                {error.password && (
+                   <p className=" absolute text-xl bg-green-400 rounded text-red-600">
+                    {errorMessages.password}
+                  </p>
+                )}
               </div>
               <div>
                 <label
@@ -72,6 +124,7 @@ export const RegisterPage = () => {
                   Repeat Password
                 </label>
                 <input
+                  onBlur={checkForPasswordMatch}
                   value={value.repassword}
                   onChange={onChange}
                   type="password"
@@ -81,15 +134,19 @@ export const RegisterPage = () => {
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   required=""
                 />
+                    {error.repassword && (
+                   <p className=" absolute text-xl bg-green-400 rounded text-red-600">
+                    {errorMessages.repassword}
+                  </p>
+                )}
               </div>
               <input
-              
                 onClick={onRegisterHandler}
                 className="border-solid border-2 md:text-2xl font-bold text-gray-900 dark:text-white border-gray-300 pr-1 pl-1 bg-gray-50 rounded"
                 type="button"
                 value="Register"
               />
-              
+
               <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                 Already have an account?{" "}
                 <Link

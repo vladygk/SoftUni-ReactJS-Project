@@ -10,6 +10,15 @@ export const AddCardPage = () => {
     attribute: "",
     description: "",
   });
+
+  const [error, setError] = useState({
+    name: false,
+    url: false,
+    attribute:false,
+    description:false
+  });
+
+
   const navigate = useNavigate();
   const { token } = useContext(AuthContext);
 
@@ -17,10 +26,24 @@ export const AddCardPage = () => {
     setValue((state) => ({ ...state, [e.target.name]: e.target.value }));
   };
 
-  const onCreateHandler = async (e) => {
-    const data = await create(value, token.token);
-    navigate('/');
+  const checkForError = (e) => {
+    if (e.target.value==="") {
+      setError((state) => ({ ...state, [e.target.name]: true }));
+    } else {
+      setError((state) => ({ ...state, [e.target.name]: false }));
+    }
+
   };
+
+  const onCreateHandler = async (e) => {
+    if(Object.values(value).some(x=>x==="")){
+      return;
+    }
+    await create(value, token.token);
+    navigate('/catalog');
+  };
+
+
 
   return (
     <form className=" bg-[url('/blueEyes.jpg')]  mt-2 mx-auto  flex flex-col items-center border-solid border-2 w-1/2 pb-10 pt-10 rounded-3xl">
@@ -36,6 +59,7 @@ export const AddCardPage = () => {
           Card Name
         </label>
         <input
+        onBlur={checkForError}
           name="name"
           onChange={onChange}
           value={value.name}
@@ -43,6 +67,11 @@ export const AddCardPage = () => {
           id="card-name"
           className="bg-gray-50 border w-96  h-10 border-gray-300 text-2xl text-gray-900  rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         />
+        {error.name  && (
+                   <p className=" absolute text-xl bg-green-400 rounded text-red-600">
+                    Name is required
+                  </p>
+                )}
       </div>
       <div className="mb-6">
         <label
@@ -52,6 +81,7 @@ export const AddCardPage = () => {
           Card Image Url
         </label>
         <input
+         onBlur={checkForError}
           name="url"
           onChange={onChange}
           value={value.url}
@@ -59,6 +89,11 @@ export const AddCardPage = () => {
           id="card-image"
           className="bg-gray-50 border w-96  h-10 border-gray-300 text-gray-900 text-2xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         />
+         {error.url  && (
+                   <p className=" absolute text-xl bg-green-400 rounded text-red-600">
+                    Url is required
+                  </p>
+                )}
       </div>
       <div>
         <label
@@ -68,6 +103,7 @@ export const AddCardPage = () => {
           Card Attribute
         </label>
         <input
+         onBlur={checkForError}
           name="attribute"
           onChange={onChange}
           value={value.attribute}
@@ -75,6 +111,11 @@ export const AddCardPage = () => {
           id="card-image"
           className="bg-gray-50 border w-96  h-10 border-gray-300 text-gray-900 text-2xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         />
+         {error.attribute && (
+                   <p className=" absolute text-xl bg-green-400 rounded text-red-600">
+                    Attribute is required
+                  </p>
+                )}
       </div>
       <div>
         <label
@@ -84,6 +125,7 @@ export const AddCardPage = () => {
           Card description/Effect
         </label>
         <textarea
+         onBlur={checkForError}
           name="description"
           onChange={onChange}
           value={value.description}
@@ -91,6 +133,11 @@ export const AddCardPage = () => {
           id="small-input"
           className="block resize-none  p-2 w-96  text-gray-900 border text-2xl border-gray-300 rounded-lg bg-gray-50  focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         />
+          {error.description  && (
+                   <p className=" absolute text-xl bg-green-400 rounded text-red-600">
+                    Description is required
+                  </p>
+                )}
       </div>
       <input
         type="button"

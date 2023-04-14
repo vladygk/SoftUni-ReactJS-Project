@@ -2,7 +2,7 @@ import { useEffect, useState, useContext } from "react";
 import { getOne, remove } from "../services/cardServices";
 import { Link, useNavigate, useParams, Routes, Route } from "react-router-dom";
 import { AuthContext } from "../contexts/authContext.jsx";
-import { add, getAllFavorites } from "../services/favoritesService";
+
 export const DetailsPage = () => {
   const [value, setValue] = useState({});
 
@@ -16,26 +16,12 @@ export const DetailsPage = () => {
 
   const removeHandler = async () => {
     await remove(cardId, token.token);
-    navigate("/");
+    navigate("/catalog");
   };
 
   const isCreator = value._ownerId === token?.id;
 
-  const addToFavoritesHandler = async () => {
-    //Add current cardId to favorite array fro current user
-    const oldFavorites = await getAllFavorites(token.id);
-    const oldFavoritesForUser = {...(oldFavorites.filter(
-      (x) => x.userId === token.id
-    ))};
-    
-    const newFavorites = {...oldFavoritesForUser[0], favorites:[...oldFavoritesForUser[0].favorites,cardId]}
-    
-    await add(
-      oldFavoritesForUser[0]._id,
-      token.token,
-      newFavorites
-    );
-  };
+
   return (
     <>
       <div className=" w-1/2 h-3/4 border-2 absolute left-1/4 text-white mt-4 bg-no-repeat bg-cover bg-[url('/details-bg.jpg')] border-gray-300 flex flex-col rounded-3xl overflow-hidden ">
@@ -52,19 +38,12 @@ export const DetailsPage = () => {
       </div>
       <div className=" flex flex-col absolute left-80 bottom-1/2 ">
         <Link
-          to="/"
+          to="/catalog"
           className="text-center p-1 border-2 border-gray-300 w-32 h-12 rounded-xl text-2xl hover:bg-orange-900 hover:text-white bg-orange-500"
         >
           Back 🔙
         </Link>
-        {token && (
-          <button
-            onClick={addToFavoritesHandler}
-            className="text-center p-1 border-2 border-gray-300 w-32 h-12 rounded-xl text-2xl hover:bg-orange-900 hover:text-white bg-orange-500"
-          >
-            Add ❤️
-          </button>
-        )}
+       
         {token && isCreator && (
           <Link
             to="edit"
