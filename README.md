@@ -1,4 +1,4 @@
-# SoftUni React Project ![Alt text](https://cdn4.iconfinder.com/data/icons/logos-3/600/React.js_logo-512.png "a title")
+# SoftUni React Project ![Alt text](https://assets.stickpng.com/images/584830f5cef1014c0b5e4aa1.png)
 ---
 
 **Project Name**: Yu-Gi-Oh DB
