@@ -5,7 +5,9 @@
 
 **Main functionality**:  
 - Authentication system
-- Crud operations on the *Cards* colection
+- *CRUD* operations on the *Cards* collection
+-  Route guarding
+-  Client side validation
 
 **Technologyt used**
 -React JS
