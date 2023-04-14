@@ -14,3 +14,5 @@
 - React Router
 - Tailwind css
 - Softuni practice server
+
+*To run the project: npm run dev*
