@@ -9,8 +9,8 @@
 -  Route guarding
 -  Client side validation
 
-**Technology stack**
--React JS
--React Router
--Tailwind css
--Softuni practice server
+**Tech Stack**
+- React JS
+- React Router
+- Tailwind css
+- Softuni practice server
