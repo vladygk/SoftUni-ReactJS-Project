@@ -1,4 +1,4 @@
-# SoftUni-ReactJS-Project
+# SoftUni React Project
 ---
 
 **Project Name**: Yu-Gi-Oh DB
