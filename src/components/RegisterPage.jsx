@@ -19,8 +19,8 @@ export const RegisterPage = () => {
     password: /[A-Za-z0-9\-\_?!.#$].{5,30}/g,
   };
   const errorMessages = {
-    username: "Invalid username, length must be between 3 and 20",
-    password: "Invalid password, length must me between 5 and 30",
+    username: "Invalid username",
+    password: "Invalid password",
     repassword:"Password doesn't match"
   };
 

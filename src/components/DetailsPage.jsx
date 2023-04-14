@@ -32,7 +32,7 @@ export const DetailsPage = () => {
         <div className="flex p-2 h-4/6 justify-center text-2xl">
           <img className="" src={value.url} alt="" />
         </div>
-        <div className="h-2/6 bg-[url('/details-bg.jpg')] bg-no-repeat bg-cover text-center border-t-2 relative text-2xl ">
+        <div className="h-2/6 px-5 pt-5 bg-[url('/details-bg.jpg')] bg-no-repeat bg-cover text-center border-t-2 relative text-2xl ">
           <p>{value.description}</p>
         </div>
       </div>

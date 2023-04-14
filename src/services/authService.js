@@ -32,19 +32,6 @@ export const register = async (body) => {
 
   const token = await response.json();
 
-
-await fetch("http://localhost:3030/data/favorites", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "X-Authorization": `${token.accessToken}`,
-    },
-    body: JSON.stringify({
-     userId: token._id,
-     favorites:[]
-    }),
-  });
-
   return token;
 };
 

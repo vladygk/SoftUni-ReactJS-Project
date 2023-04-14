@@ -15,9 +15,8 @@ import { GuardedRoute } from "./utils/GuardedRoute";
 import { RestrictedAccessPage } from "./components/RestrictedAccessPage";
 
 function App() {
-  const [token, setToken] = useState(() => {
-    return get();
-  });
+  const [token, setToken] = useState(() => get()
+  );
   const navigate = useNavigate();
 
   const onRegister = async (value) => {

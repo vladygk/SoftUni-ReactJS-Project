@@ -12,7 +12,9 @@ export const GuardedRoute = ({
   const { cardId } = useParams();
 
   useEffect(() => {
+    if(cardId){
     getOne(cardId).then((v) => setValue(v));
+    }
   }, []);
 
   let auth;
