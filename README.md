@@ -4,8 +4,8 @@
 **Project Name**: Yu-Gi-Oh DB
 
 **Main functionality**:  
--Authentication system
--Crud operations on the *Cards* colection
+- Authentication system
+- Crud operations on the *Cards* colection
 
 **Technologyt used**
 -React JS
